@@ -147,6 +147,15 @@ skill, el CI falla.
   [direcciones_ar](https://github.com/lucabaello1998/direcciones_ar#usar) para el detalle.
 - Sólo Argentina (`countrycodes=ar`) por defecto.
 
+## Publicar en npm
+
+```bash
+npm publish
+```
+
+No está publicado todavía: se instala desde el repo. El paquete incluye `server.js`, `nominatim.js` y
+`skill/SKILL.md` (ver `files` en `package.json`); el `bin` queda como `mcp-direcciones-ar`.
+
 ## Licencia
 
-MIT.
+MIT. Ver [`LICENSE`](LICENSE).
