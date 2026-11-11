@@ -1,0 +1,33 @@
+{
+  "name": "mcp-direcciones-ar",
+  "version": "0.1.0",
+  "description": "MCP server para direcciones argentinas con Nominatim: autocompletado y geocodificación inversa con caché y rate limit. Sin dependencias.",
+  "type": "module",
+  "bin": {
+    "mcp-direcciones-ar": "./server.js"
+  },
+  "main": "./server.js",
+  "files": [
+    "server.js",
+    "nominatim.js"
+  ],
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "nominatim",
+    "geocoding",
+    "argentina"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucabaello1998/mcp-direcciones-ar"
+  },
+  "license": "MIT"
+}

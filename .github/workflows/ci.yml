@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Tests (sin red: fetch inyectado)
+        run: npm test
+
+      - name: El servidor arranca y contesta el handshake
+        run: |
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05"}}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            | node server.js > salida.jsonl
+          grep -q '"protocolVersion"' salida.jsonl
+          grep -q 'buscar_direccion' salida.jsonl
+          # stdout sólo puede tener mensajes del protocolo: dos líneas, dos respuestas.
+          test "$(wc -l < salida.jsonl)" -eq 2
