@@ -47,6 +47,11 @@ test("el skill declara nombre, descripción y licencia", () => {
   assert.ok(campos.description.length >= 80, "la descripción tiene que explicar cuándo usarla");
   assert.ok(campos.description.length <= 1024, "la descripción tiene que entrar en el límite de los agentes");
   assert.match(campos.description, /Argentina/i);
+  // El frontmatter se lee como YAML: un ": " o un salto de línea sin comillas lo rompe
+  // y el agente se queda sin skill.
+  for (const [clave, valor] of Object.entries(campos)) {
+    assert.ok(!valor.includes(": "), `"${clave}" tiene dos puntos y espacio: hay que entrecomillarlo`);
+  }
 });
 
 test("la descripción dice cuándo usarla, no solo qué hace", () => {
