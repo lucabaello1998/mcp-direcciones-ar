@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1100">
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #0b0d13;
+}
+.window {
+  width: 1100px;
+  min-height: 406px;
+  background: #0b0d13;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: "Cascadia Code", "Consolas", "Courier New", monospace;
+  color: #e6e6e6;
+  font-size: 12px;
+  line-height: 18px;
+}
+.titlebar {
+  height: 32px;
+  background: #1a1d26;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+.titlebar-title {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #8b92a8;
+  line-height: 32px;
+}
+.content {
+  padding: 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <span class="dot red"></span>
+    <span class="dot yellow"></span>
+    <span class="dot green"></span>
+    <span class="titlebar-title">node server.js (stdio MCP)</span>
+  </div>
+  <div class="content">{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;result&quot;:{&quot;protocolVersion&quot;:&quot;2024-11-05&quot;,&quot;capabilities&quot;:{&quot;tools&quot;:{}},&quot;serverInfo&quot;:{&quot;name&quot;:&quot;mcp-direcciones-ar&quot;,&quot;version&quot;:&quot;0.1.0&quot;}}}
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:2,&quot;result&quot;:{&quot;tools&quot;:[{&quot;name&quot;:&quot;buscar_direccion&quot;,&quot;description&quot;:&quot;Busca direcciones argentinas por texto libre y devuelve calle, altura, barrio, localidad y coordenadas. Sirve para autocompletar un campo de dirección. Una lista vacía significa que no hay coincidencias.&quot;,&quot;inputSchema&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;consulta&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Texto a buscar, por ejemplo \&quot;rivadavia 5000 caballito\&quot;.&quot;,&quot;minLength&quot;:1},&quot;limite&quot;:{&quot;type&quot;:&quot;integer&quot;,&quot;description&quot;:&quot;Cuántos resultados devolver (1 a 10, por defecto 5).&quot;,&quot;minimum&quot;:1,&quot;maximum&quot;:10}},&quot;required&quot;:[&quot;consulta&quot;],&quot;additionalProperties&quot;:false}},{&quot;name&quot;:&quot;geocodificar_inverso&quot;,&quot;description&quot;:&quot;Devuelve la dirección argentina más cercana a un punto (latitud, longitud). Si el punto no tiene una dirección asociada, devuelve null.&quot;,&quot;inputSchema&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;latitud&quot;:{&quot;type&quot;:&quot;number&quot;,&quot;minimum&quot;:-90,&quot;maximum&quot;:90},&quot;longitud&quot;:{&quot;type&quot;:&quot;number&quot;,&quot;minimum&quot;:-180,&quot;maximum&quot;:180}},&quot;required&quot;:[&quot;latitud&quot;,&quot;longitud&quot;],&quot;additionalProperties&quot;:false}}]}}
+[mcp-direcciones-ar] v0.1.0 escuchando por stdio
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:3,&quot;result&quot;:{&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;{\n  \&quot;consulta\&quot;: \&quot;rivadavia 5000 caballito\&quot;,\n  \&quot;total\&quot;: 2,\n  \&quot;resultados\&quot;: [\n    {\n      \&quot;direccion\&quot;: \&quot;Avenida Rivadavia 5000, Caballito\&quot;,\n      \&quot;detalle\&quot;: \&quot;Caballito, Buenos Aires, Ciudad Autónoma de Buenos Aires, C1424CER, Argentina\&quot;,\n      \&quot;calle\&quot;: \&quot;Avenida Rivadavia\&quot;,\n      \&quot;altura\&quot;: \&quot;5000\&quot;,\n      \&quot;barrio\&quot;: \&quot;Caballito\&quot;,\n      \&quot;localidad\&quot;: \&quot;Buenos Aires\&quot;,\n      \&quot;provincia\&quot;: \&quot;Ciudad Autónoma de Buenos Aires\&quot;,\n      \&quot;codigoPostal\&quot;: \&quot;C1424CER\&quot;,\n      \&quot;latitud\&quot;: -34.6183831,\n      \&quot;longitud\&quot;: -58.4362001\n    },\n    {\n      \&quot;direccion\&quot;: \&quot;Avenida Rivadavia 5000, Caballito\&quot;,\n      \&quot;detalle\&quot;: \&quot;Caballito, Buenos Aires, Ciudad Autónoma de Buenos Aires, C1424CER, Argentina\&quot;,\n      \&quot;calle\&quot;: \&quot;Avenida Rivadavia\&quot;,\n      \&quot;altura\&quot;: \&quot;5000\&quot;,\n      \&quot;barrio\&quot;: \&quot;Caballito\&quot;,\n      \&quot;localidad\&quot;: \&quot;Buenos Aires\&quot;,\n      \&quot;provincia\&quot;: \&quot;Ciudad Autónoma de Buenos Aires\&quot;,\n      \&quot;codigoPostal\&quot;: \&quot;C1424CER\&quot;,\n      \&quot;latitud\&quot;: -34.6183451,\n      \&quot;longitud\&quot;: -58.4362607\n    }\n  ]\n}&quot;}],&quot;isError&quot;:false}}</div>
+</div>
+</body>
+</html>

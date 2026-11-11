@@ -16,6 +16,10 @@ Sin dependencias. Un solo `node server.js`.
 { "direccion": "Avenida Rivadavia 5000, Caballito", "barrio": "Caballito", "latitud": -34.6183831, "longitud": -58.4362001 }
 ```
 
+![Handshake y llamada real por stdio](docs/terminal.png)
+
+Salida real del servidor MCP por stdio: `initialize`, `tools/list` y `tools/call` a `buscar_direccion("rivadavia 5000 caballito")`.
+
 ## Herramientas
 
 | Herramienta | Para qué | Devuelve |
