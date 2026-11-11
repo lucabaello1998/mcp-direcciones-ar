@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Tests (sin red: fetch inyectado)
+      - name: "Tests (sin red: fetch inyectado)"
         run: npm test
 
       - name: El servidor arranca y contesta el handshake
