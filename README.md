@@ -151,14 +151,40 @@ skill, el CI falla.
   [direcciones_ar](https://github.com/lucabaello1998/direcciones_ar#usar) para el detalle.
 - Sólo Argentina (`countrycodes=ar`) por defecto.
 
-## Publicar en npm
+## Publicar en npm y en el registro de MCP
 
-```bash
-npm publish
-```
+Todavía no está publicado: se instala desde el repo. Cuando toque publicarlo, son dos pasos y ya está
+todo preparado:
 
-No está publicado todavía: se instala desde el repo. El paquete incluye `server.js`, `nominatim.js` y
-`skill/SKILL.md` (ver `files` en `package.json`); el `bin` queda como `mcp-direcciones-ar`.
+1. **npm** (el paquete incluye `server.js`, `nominatim.js`, `skill/SKILL.md` y `server.json`):
+
+   ```bash
+   npm login
+   npm publish --access public
+   ```
+
+   `package.json` ya declara `"mcpName": "io.github.lucabaello1998/mcp-direcciones-ar"`, que es lo que el
+   registro oficial verifica contra el paquete publicado.
+
+2. **Registro oficial de MCP** ([`server.json`](server.json), schema `2025-12-11`). Requiere que el
+   paquete exista en npm (el registro sólo guarda metadatos y no acepta repos de GitHub):
+
+   ```bash
+   # binario de github.com/modelcontextprotocol/registry/releases
+   mcp-publisher validate
+   mcp-publisher login github     # namespace io.github.lucabaello1998/*
+   mcp-publisher publish
+   ```
+
+3. Verificar y, recién ahí, cambiar el install del README a cero fricción:
+
+   ```json
+   { "mcpServers": { "direcciones-ar": { "command": "npx", "args": ["-y", "mcp-direcciones-ar"] } } }
+   ```
+
+   ```bash
+   curl "https://registry.modelcontextprotocol.io/v0.1/servers?search=mcp-direcciones-ar"
+   ```
 
 ## Licencia
 

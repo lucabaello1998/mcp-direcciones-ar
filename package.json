@@ -1,6 +1,7 @@
 {
   "name": "mcp-direcciones-ar",
   "version": "0.1.0",
+  "mcpName": "io.github.lucabaello1998/mcp-direcciones-ar",
   "description": "MCP server para direcciones argentinas con Nominatim: autocompletado y geocodificación inversa con caché y rate limit. Sin dependencias.",
   "type": "module",
   "bin": {
@@ -10,7 +11,8 @@
   "files": [
     "server.js",
     "nominatim.js",
-    "skill/SKILL.md"
+    "skill/SKILL.md",
+    "server.json"
   ],
   "scripts": {
     "start": "node server.js",

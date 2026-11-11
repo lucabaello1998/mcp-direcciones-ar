@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.lucabaello1998/mcp-direcciones-ar",
+  "title": "Direcciones AR (Nominatim)",
+  "description": "Autocompletado y geocodificación inversa de direcciones argentinas con Nominatim (OSM).",
+  "repository": {
+    "url": "https://github.com/lucabaello1998/mcp-direcciones-ar",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "mcp-direcciones-ar",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "NOMINATIM_URL",
+          "description": "URL base para apuntar a una instancia propia de Nominatim.",
+          "default": "https://nominatim.openstreetmap.org",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}
