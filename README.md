@@ -1,5 +1,9 @@
 # mcp-direcciones-ar
 
+<p align="center">
+  <a href="https://github.com/lucabaello1998/mcp-direcciones-ar/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/lucabaello1998/mcp-direcciones-ar?label=release"></a>
+</p>
+
 **MCP server para direcciones argentinas.** Le da a Claude Code, OpenCode, Cursor o cualquier cliente
 MCP dos herramientas: buscar una dirección por texto y obtener la dirección más cercana a un punto.
 Envuelve el mismo contrato que el paquete Dart [direcciones_ar](https://github.com/lucabaello1998/direcciones_ar)
