@@ -9,7 +9,8 @@
   "main": "./server.js",
   "files": [
     "server.js",
-    "nominatim.js"
+    "nominatim.js",
+    "skill/SKILL.md"
   ],
   "scripts": {
     "start": "node server.js",

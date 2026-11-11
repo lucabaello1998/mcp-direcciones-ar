@@ -63,6 +63,24 @@ Variables de entorno:
 |---|---|---|
 | `NOMINATIM_URL` | Apuntar a una instancia propia de Nominatim | `https://nominatim.openstreetmap.org` |
 
+## Skill para agentes
+
+El server solo no alcanza: un agente necesita saber **cuándo** conviene usarlo. Eso es un skill — un
+`SKILL.md` con las instrucciones — y está en [`skill/SKILL.md`](skill/SKILL.md). Le dice al agente
+que lo use para autocompletar o validar una dirección argentina, qué hacer con una lista vacía, y
+cuándo no usarlo (otros países, geocodificación masiva).
+
+Instalarlo en Claude Code, Cursor u otro agente que lea `~/.claude/skills/`:
+
+```bash
+mkdir -p ~/.claude/skills/direcciones-ar
+cp skill/SKILL.md ~/.claude/skills/direcciones-ar/SKILL.md
+```
+
+En OpenCode va en `~/.config/opencode/skills/direcciones-ar/SKILL.md`. El skill **no** conecta el
+MCP: primero tiene que estar configurado como en la sección anterior, si no el agente no va a
+encontrar las herramientas.
+
 ## Probar sin cliente
 
 El servidor habla JSON-RPC 2.0 por stdin/stdout, un mensaje por línea. Se puede probar a mano:
@@ -90,7 +108,8 @@ En Windows, con PowerShell:
 ```
 server.js     protocolo MCP (initialize, tools/list, tools/call) sobre stdio
 nominatim.js  cliente de Nominatim: caché LRU, cola de 1 req/s, parseo de la dirección
-test/         18 tests con fetch inyectado (no tocan la red)
+skill/        SKILL.md: cuándo y cómo usar las herramientas
+test/         26 tests con fetch inyectado (no tocan la red)
 ```
 
 Decisiones que importan:
@@ -107,13 +126,18 @@ Decisiones que importan:
 ## Tests
 
 ```bash
-npm test          # node --test, 18 tests
+npm test          # node --test, 26 tests
 ```
 
 Los tests usan un `fetch` inyectado: verifican los parámetros que se mandan, la caché, el
 espaciamiento entre llamadas, los errores (500, JSON inválido, coordenadas fuera de rango) y el
 protocolo (initialize, tools/list, notificaciones sin respuesta, método desconocido). Ninguno sale a
 la red.
+
+Además hay 8 tests del skill: que el frontmatter tenga nombre, descripción y licencia; que sólo
+nombre herramientas que existen en `server.js`; y que los parámetros documentados sean exactamente
+los del `inputSchema`. Si alguien renombra una herramienta o agrega un parámetro y se olvida del
+skill, el CI falla.
 
 ## Límites
 
