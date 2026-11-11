@@ -73,6 +73,11 @@ export async function ejecutarHerramienta(nombre, argumentos = {}, cliente) {
     if (typeof consulta !== "string" || !consulta.trim()) {
       return respuesta("Falta el parámetro 'consulta'.", { error: true });
     }
+    // Un tope evita mandar 10 MB a Nominatim y URLs absurdas: una dirección no
+    // llega ni cerca de 300 caracteres.
+    if (consulta.length > 300) {
+      return respuesta("La consulta no puede superar los 300 caracteres.", { error: true });
+    }
     const limite = Number.isInteger(argumentos.limite) ? Math.min(Math.max(argumentos.limite, 1), 10) : 5;
 
     try {
@@ -105,6 +110,13 @@ export async function ejecutarHerramienta(nombre, argumentos = {}, cliente) {
     const { latitud, longitud } = argumentos;
     if (typeof latitud !== "number" || typeof longitud !== "number") {
       return respuesta("Hacen falta 'latitud' y 'longitud' numéricas.", { error: true });
+    }
+    // El schema lo declara; validarlo acá evita mandar coordenadas imposibles.
+    if (!Number.isFinite(latitud) || latitud < -90 || latitud > 90) {
+      return respuesta("La latitud tiene que estar entre -90 y 90.", { error: true });
+    }
+    if (!Number.isFinite(longitud) || longitud < -180 || longitud > 180) {
+      return respuesta("La longitud tiene que estar entre -180 y 180.", { error: true });
     }
 
     try {
